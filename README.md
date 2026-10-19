@@ -2,19 +2,25 @@
 
 Complete custom-coded Next.js 14 (App Router, TypeScript, Tailwind CSS) translation of [ichibanstays.com](https://ichibanstays.com) with **Firebase Firestore** (lead & property projection capture) and **Firebase Authentication** (Landlord & Admin Portal), ready for one-click deployment to **Vercel** or **Netlify**.
 
-## Content
+## What is in here
 
-All pages mirror the live WordPress site (same URLs, trailing slashes, titles, meta descriptions, nav):
-home, about, contact, FAQs (landlord + guest), services (short-term let, Airbnb, serviced accommodation,
-guaranteed rent, holiday let, landlords), Areas We Cover, 38 location pages (`/property-management-<area>/`),
-landlord guides and 10 posts.
+A replica of the WordPress site at ichibanstays.com: same URLs (with trailing slashes), page text, titles, meta
+descriptions, Open Graph / Twitter tags, schema.org JSON-LD, sitemaps (`/sitemap_index.xml`, `/page-sitemap.xml`,
+`/post-sitemap.xml`), `robots.txt`, `/go/whatsapp/` redirect and 404 page.
 
-- `scripts/build-content.py` converts a WordPress export (Tools > Export) into `src/content/site.json`
-  (`python3 -I scripts/build-content.py export.xml`). Re-run it to refresh content.
-- Home (`src/app/page.tsx`) and `/book-a-consultation/` are hand-built from the Elementor layout.
-- Everything else renders through `src/app/[slug]/page.tsx`.
-- Lead forms write to Firestore: `projections` (home / landlord pages) and `consultations` (booking page).
-- Images are still served from `ichibanstays.com/wp-content/uploads`; download them into `public/` before the WordPress site is switched off.
+- **Content** comes from `src/content/site.json` (pages, posts, menu), built from a WordPress export with
+  `python3 -I scripts/build-content.py export.xml`. Home and `/book-a-consultation/` are hand-built React; every other page
+  renders through `src/app/[slug]/page.tsx`.
+- **SEO data** (`src/content/live-meta.json`) was crawled from the live pages (title, description, canonical, Open Graph,
+  JSON-LD) and is served unchanged so rankings carry over.
+- **Images** live in `public/wp-content/uploads/` with their WordPress paths, so no WordPress hosting is needed.
+- **Forms** write to Firestore: `projections` (home page lead form) and `consultations` (booking form, with the same
+  calendar and half-hour slots as the WordPress version). `firestore.rules` lets visitors create documents and only
+  `contact@ichibanstays.com` read them. Leads show up in `/portal/`.
+- **Cookie consent + analytics**: `ConsentBanner` shows the same Accept / Deny / View preferences dialog and loads Google
+  Analytics (`GT-NFB29244`) only after the visitor accepts statistics cookies. Call, WhatsApp, email, CTA and
+  form-submit events are sent as on the live site.
+- **Mobile quick-contact bar** (Call / WhatsApp / Free Assessment) matches the WordPress mobile bar.
 
 ## Quick Start
 

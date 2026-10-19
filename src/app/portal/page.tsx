@@ -8,8 +8,11 @@ import {
   onAuthStateChanged,
   fetchAllProjections,
   updateLeadStatus,
+  fetchAllConsultations,
+  updateConsultationStatus,
   User,
   ProjectionLead,
+  ConsultationBooking,
 } from "@/lib/firebase";
 import { ShieldCheck, LogOut, RefreshCw } from "lucide-react";
 
@@ -18,6 +21,7 @@ export default function PortalPage() {
   const [email, setEmail] = useState("contact@ichibanstays.com");
   const [password, setPassword] = useState("");
   const [leads, setLeads] = useState<ProjectionLead[]>([]);
+  const [bookings, setBookings] = useState<ConsultationBooking[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,8 +34,8 @@ export default function PortalPage() {
 
   const loadLeads = async () => {
     try {
-      const data = await fetchAllProjections();
-      setLeads(data);
+      setLeads(await fetchAllProjections());
+      setBookings(await fetchAllConsultations());
     } catch {
       // Demo fallback if Firebase is not yet connected
     }
@@ -145,6 +149,45 @@ export default function PortalPage() {
                     value={l.status || "new"}
                     onChange={(e) =>
                       l.id && updateLeadStatus(l.id, e.target.value as any).then(loadLeads)
+                    }
+                    className="border border-slate-300 rounded px-2 py-1 text-xs"
+                  >
+                    <option value="new">New</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="assessed">Assessed</option>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+        <h2 className="p-4 font-semibold border-b border-slate-200">Consultation bookings</h2>
+        <table className="w-full text-left text-sm">
+          <thead className="bg-slate-100 text-xs uppercase text-slate-600">
+            <tr>
+              <th className="p-4">Name</th>
+              <th className="p-4">Preferred date</th>
+              <th className="p-4">Time</th>
+              <th className="p-4">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200">
+            {bookings.map((b) => (
+              <tr key={b.id}>
+                <td className="p-4">
+                  <div className="font-semibold">{b.name}</div>
+                  <div className="text-xs text-slate-500">{b.email} • {b.phone}</div>
+                </td>
+                <td className="p-4">{b.preferredDate}</td>
+                <td className="p-4">{b.preferredTime}</td>
+                <td className="p-4">
+                  <select
+                    value={b.status || "new"}
+                    onChange={(e) =>
+                      b.id && updateConsultationStatus(b.id, e.target.value as "new" | "contacted" | "assessed").then(loadLeads)
                     }
                     className="border border-slate-300 rounded px-2 py-1 text-xs"
                   >

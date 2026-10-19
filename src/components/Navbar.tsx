@@ -51,16 +51,17 @@ function Desktop({ item, path }: { item: NavItem; path: string }) {
   );
 }
 
-function Mobile({ item, close, depth = 0 }: { item: NavItem; close: () => void; depth?: number }) {
+function Mobile({ item, close, path, depth = 0 }: { item: NavItem; close: () => void; path: string; depth?: number }) {
   const [open, setOpen] = useState(false);
+  const active = item.href === path;
   return (
     <li>
-      <div className="flex items-center justify-between" style={{ paddingLeft: depth * 16 }}>
-        <Link href={item.href} onClick={close} className="py-2.5 text-sm text-brand-ink">
+      <div className={`flex items-center justify-between ${active ? "bg-brand-sage" : ""}`} style={{ paddingLeft: 20 + depth * 16 }}>
+        <Link href={item.href} onClick={close} className={`flex-1 py-3 text-[15px] ${active ? "text-brand-green" : "text-[#334155]"}`}>
           {item.label}
         </Link>
         {item.children.length > 0 && (
-          <button aria-label={`Toggle ${item.label}`} onClick={() => setOpen(!open)} className="p-2">
+          <button aria-label={`Toggle ${item.label}`} onClick={() => setOpen(!open)} className="px-4 py-3 border-l border-slate-100">
             <ChevronDown className={`w-4 h-4 transition ${open ? "rotate-180" : ""}`} />
           </button>
         )}
@@ -68,7 +69,7 @@ function Mobile({ item, close, depth = 0 }: { item: NavItem; close: () => void; 
       {open && (
         <ul>
           {item.children.map((c) => (
-            <Mobile key={c.href + c.label} item={c} close={close} depth={depth + 1} />
+            <Mobile key={c.href + c.label} item={c} close={close} path={path} depth={depth + 1} />
           ))}
         </ul>
       )}
@@ -103,9 +104,9 @@ export default function Navbar() {
         </button>
       </div>
       {open && (
-        <ul className="lg:hidden border-t border-slate-200 px-5 pb-4 max-h-[80vh] overflow-y-auto bg-white">
+        <ul className="lg:hidden border-t border-slate-200 max-h-[80vh] overflow-y-auto bg-white">
           {NAV.map((n) => (
-            <Mobile key={n.href + n.label} item={n} close={() => setOpen(false)} />
+            <Mobile key={n.href + n.label} item={n} close={() => setOpen(false)} path={path} />
           ))}
         </ul>
       )}

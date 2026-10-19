@@ -70,7 +70,7 @@ export default function HomePage() {
       <section
         className="hero-bg relative bg-cover bg-center text-white"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a26] via-[#1e3a26]/85 to-[#1e3a26]/0 max-md:from-[#1e3a26]/85 max-md:via-[#1e3a26]/80 max-md:to-[#1e3a26]/75" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#1e3a26_0%,rgba(30,58,38,0.93)_32%,rgba(30,58,38,0.4)_62%,rgba(30,58,38,0)_100%)] max-md:bg-[#1e3a26]/80" />
         <div className="relative max-w-[1440px] mx-auto px-5 lg:px-6 pt-12 pb-0">
           <div className="max-w-[620px] border-l-2 border-brand-teal pl-4 sm:pl-8 -ml-1">
             <p className="font-serif text-xl font-semibold text-white/80">Short Let Management Across the UK</p>
@@ -110,12 +110,12 @@ export default function HomePage() {
       <section className="max-w-[1440px] mx-auto px-5 lg:px-5 pt-16 md:pt-24 pb-16">
         <p className="font-serif italic text-xl text-brand-teal">How It Works</p>
         <h2 className={`${sectionH} mt-2`}>Our Simple 5 Step Process</h2>
-        <div className="relative grid md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-y-10 mt-10 md:mt-14">
+        <div className="relative grid gap-4 md:flex md:flex-wrap md:justify-center md:gap-y-10 lg:grid lg:grid-cols-5 mt-10 md:mt-14">
           <div className="hidden lg:block absolute top-9 left-[10%] right-[10%] h-px bg-brand-teal/40" />
           {steps.map(({ Icon, title, text }, i) => (
             <div
               key={title}
-              className="relative max-md:grid max-md:grid-cols-[72px_1fr] max-md:gap-x-4 max-md:items-center max-md:bg-white max-md:border max-md:border-slate-200 max-md:rounded-xl max-md:shadow-sm max-md:p-4 md:text-center md:px-3"
+              className="relative md:w-1/3 lg:w-auto max-md:grid max-md:grid-cols-[72px_1fr] max-md:gap-x-4 max-md:items-center max-md:bg-white max-md:border max-md:border-slate-200 max-md:rounded-xl max-md:shadow-sm max-md:p-4 md:text-center md:px-3"
             >
               <div className="w-[72px] h-[72px] rounded-full bg-white border border-slate-300 text-brand-forest flex items-center justify-center md:mx-auto">
                 <Icon className="w-8 h-8" strokeWidth={2.5} />
@@ -134,12 +134,12 @@ export default function HomePage() {
       <section className="max-w-[1440px] mx-auto px-5">
         <div className="border-b border-slate-200 pb-16 pt-10 grid grid-cols-2 gap-y-8 lg:grid-cols-4">
           {performance.map(({ Icon, value, label }) => (
-            <div key={label} className="flex flex-col items-center text-center lg:text-left lg:items-start lg:border-l border-slate-400 lg:first:border-l-0 lg:px-10">
-              <div className="flex flex-col lg:flex-row items-center gap-1 lg:gap-4">
+            <div key={label} className="flex flex-col items-center text-center md:text-left md:items-start border-slate-400 md:px-10 md:[&:nth-child(even)]:border-l lg:[&:nth-child(n+2)]:border-l">
+              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-4">
                 <Icon className="w-7 h-7 text-brand-teal shrink-0" />
                 <p className="font-serif text-4xl font-medium text-brand-forest">{value}</p>
               </div>
-              <p className="font-body text-sm lg:text-base text-slate-700 mt-1 lg:ml-11">{label}</p>
+              <p className="font-body text-sm md:text-base text-slate-700 mt-1 md:ml-11">{label}</p>
             </div>
           ))}
         </div>

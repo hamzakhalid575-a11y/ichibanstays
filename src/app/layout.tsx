@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileBar from "@/components/MobileBar";
+import ConsentBanner from "@/components/ConsentBanner";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -29,10 +30,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white antialiased">
+        <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100000] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:top-2 focus:left-2">Skip to content</a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="content" className="flex-1">{children}</main>
         <Footer />
         <MobileBar />
+        <ConsentBanner />
       </body>
     </html>
   );

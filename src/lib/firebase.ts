@@ -103,6 +103,26 @@ export async function updateLeadStatus(id: string, status: "new" | "contacted" |
   await updateDoc(ref, { status });
 }
 
+export interface ConsultationBooking {
+  id?: string;
+  name: string;
+  email: string;
+  phone: string;
+  preferredDate: string;
+  preferredTime: string;
+  status?: "new" | "contacted" | "assessed";
+}
+
+export async function fetchAllConsultations(): Promise<ConsultationBooking[]> {
+  const q = query(collection(db, "consultations"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<ConsultationBooking, "id">) }));
+}
+
+export async function updateConsultationStatus(id: string, status: "new" | "contacted" | "assessed") {
+  await updateDoc(doc(db, "consultations", id), { status });
+}
+
 export {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,

@@ -64,7 +64,7 @@ function Consultation({ html }: { html: string }) {
         <div className="relative max-w-[1400px] mx-auto px-5 pt-[50px] pb-[30px] grid lg:grid-cols-[65fr_35fr] gap-10 items-start">
           <div className="lg:pr-[60px]">
             <p className="text-base uppercase text-[#a28d62]">Premium Property Management</p>
-            <h1 className="font-serif text-[40px] sm:text-[58px] font-medium text-brand-ink leading-[1.4]">
+            <h1 className="font-serif text-[30px] sm:text-[58px] font-medium text-brand-ink leading-[1.4]">
               Maximise Your <br />Rental Income. <br />
               <span className="text-[#2e5b3f]">We Handle <br />Everything.</span>
             </h1>
@@ -72,7 +72,7 @@ function Consultation({ html }: { html: string }) {
               We help UK landlords earn more through fully managed short stay accommodation. We handle everything so you
               enjoy higher returns without the day-to-day hassle.
             </div>
-            <div className="grid grid-cols-3 mt-12 lg:mt-[100px] max-w-[730px] rounded-[15px] bg-[#082112]/[0.68] text-white text-center p-5">
+            <div className="grid sm:grid-cols-3 gap-5 sm:gap-0 mt-12 lg:mt-[100px] max-w-[730px] rounded-[15px] bg-[#082112]/[0.68] text-white text-center p-5">
               {[
                 [Shield, "No Upfront Fees", "100% free to get started"],
                 [UserCog, "Dedicated Manager", "One point of contact"],
@@ -105,7 +105,7 @@ function Consultation({ html }: { html: string }) {
           </div>
         </div>
       </section>
-      <section className="px-5 py-[60px]">
+      <section className="px-3 sm:px-5 py-[60px]">
         <WpContent html={rest} plain />
       </section>
     </>
@@ -138,7 +138,7 @@ export default function WpPage({ params }: { params: { slug: string } }) {
           </p>
         )}
       </header>
-      <div className="px-5 pt-12 pb-16">
+      <div className="px-3 sm:px-5 pt-12 pb-16">
         <WpContent html={page.html} post={isPost} />
       </div>
       {isPost && <PostNav slug={params.slug} />}
