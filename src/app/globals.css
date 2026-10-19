@@ -11,33 +11,108 @@ body {
   color: #2f2a25;
 }
 
-/* Rendering of WordPress page/post content */
-.wp-content {
-  font-family: "Roboto", system-ui, sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  color: #3b3b3b;
+
+:root {
+  --green: #2f5e3a;
+  --green-dark: #214329;
+  --teal: #0f8586;
+  --teal-dark: #0a5f60;
+  --ink: #2f2a25;
 }
-.wp-content > * + * { margin-top: 1.1em; }
-.wp-content h1, .wp-content h2, .wp-content h3, .wp-content h4 {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  color: #2f5e3a;
+::selection { background: var(--green); color: #fff; }
+
+/* Page / post banner (Ichiban reading design) */
+.page-hero {
+  padding: 64px 16px 52px;
+  text-align: center;
+  background: linear-gradient(120deg, #1d3b25 0%, #2f5e3a 55%, #0a5f60 100%);
+}
+.page-hero::before {
+  content: "ICHIBAN STAYS";
+  display: block;
+  margin-bottom: 14px;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1.2;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.72);
 }
-.wp-content h2 { font-size: 2rem; margin-top: 2em; }
-.wp-content h3 { font-size: 1.5rem; margin-top: 1.6em; }
-.wp-content h4 { font-size: 1.2rem; margin-top: 1.4em; }
-.wp-content a { color: #2f5e3a; text-decoration: underline; text-underline-offset: 3px; }
-.wp-content a:hover { color: #244a2e; }
-.wp-content ul { list-style: disc; padding-left: 1.5rem; }
-.wp-content ol { list-style: decimal; padding-left: 1.5rem; }
-.wp-content li + li { margin-top: 0.4em; }
+.page-hero h1 {
+  max-width: 860px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.page-hero .meta { color: rgba(255, 255, 255, 0.78); font-size: 14px; margin-top: 14px; }
+.page-hero::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 22px auto 0;
+  background: var(--teal);
+  border-radius: 2px;
+  filter: brightness(1.35);
+}
+
+/* WordPress content */
+.wp-content {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.wp-content > p { margin: 0 0 1.25em; }
+.wp-content > div > p { margin: 0 0 1.25em; }
+.wp-content > div:first-child > p:first-child { font-size: 20px; line-height: 1.65; color: #3d3832; }
+.wp-content h2 {
+  position: relative;
+  margin: 2.3em 0 0.75em;
+  padding-left: 16px;
+  font-size: clamp(23px, 2.2vw, 29px);
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--green-dark);
+  border-left: 4px solid var(--teal);
+}
+.wp-content h3 { margin: 1.7em 0 0.5em; font-size: 20px; line-height: 1.4; font-weight: 650; color: var(--green); }
+.wp-content h4 { margin: 1.4em 0 0.4em; font-size: 18px; font-weight: 650; color: var(--green); }
+.wp-content ul { list-style: disc; margin: 0 0 1.5em 1.2em; padding-left: 0.4em; }
+.wp-content ol { list-style: decimal; margin: 0 0 1.5em 1.2em; padding-left: 0.4em; }
+.wp-content li { margin: 0 0 0.55em; padding-left: 0.2em; }
+.wp-content ul li::marker { color: var(--teal); }
+.wp-content ol li::marker { color: var(--teal); font-weight: 700; }
+.wp-content a {
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(15, 133, 134, 0.35);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+.wp-content a:hover { color: var(--green); text-decoration-color: currentColor; }
+.wp-content strong { color: #221e1a; font-weight: 650; }
 .wp-content img { max-width: 100%; height: auto; border-radius: 6px; }
-.wp-content figure { margin: 1.5em 0; }
-.wp-content figcaption { font-size: 0.875rem; color: #595959; margin-top: 0.4em; }
-.wp-content table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-.wp-content th, .wp-content td { border: 1px solid #dfe3d8; padding: 0.6rem 0.8rem; text-align: left; vertical-align: top; }
-.wp-content th { background: #eff1ea; color: #2f5e3a; }
-.wp-content blockquote { border-left: 3px solid #2f5e3a; padding-left: 1rem; color: #595959; }
-.wp-content .wp-block-table { overflow-x: auto; }
+.wp-content figure { margin: 0 0 1.5em; }
+.wp-content figcaption { font-size: 0.875rem; opacity: 0.75; margin-top: 0.4em; }
+.wp-content table { width: 100%; border-collapse: collapse; margin: 0 0 1.6em; font-size: 16px; }
+.wp-content th, .wp-content td { border-bottom: 1px solid #e3e8e4; padding: 10px 12px; text-align: left; }
+.wp-content th { background: #f1f6f2; color: var(--green-dark); }
+.wp-content blockquote { border-left: 3px solid var(--teal); padding-left: 1rem; }
+.wp-content h2:last-of-type { margin-top: 2.6em; }
+.wp-content h2:last-of-type ~ p {
+  background: #f1f6f2;
+  border: 1px solid #dbe7de;
+  border-radius: 10px;
+  padding: 22px 26px;
+  margin-bottom: 14px;
+}
+@media (max-width: 768px) {
+  .page-hero { padding: 40px 16px 34px; }
+  .wp-content { font-size: 17px; padding: 0 4px; }
+  .wp-content > div:first-child > p:first-child { font-size: 18px; }
+  .wp-content h2:last-of-type ~ p { padding: 18px; }
+}

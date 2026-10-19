@@ -5,11 +5,11 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { submitConsultationBooking } from "@/lib/firebase";
 
 const input =
-  "w-full px-3.5 py-2.5 rounded-md border border-slate-300 text-sm font-body focus:outline-none focus:ring-2 focus:ring-brand-green";
+  "w-full px-3.5 py-2.5 rounded-md border border-slate-300 text-sm font-body placeholder:text-slate-500 focus:outline-none focus:border-brand-green";
 const label = "block text-sm font-medium text-slate-800 mb-1";
 
 export default function BookingForm() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", preferredDate: "", preferredTime: "" });
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", preferredDate: "", preferredTime: "" });
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [k]: e.target.value });
@@ -18,7 +18,8 @@ export default function BookingForm() {
     e.preventDefault();
     setState("sending");
     try {
-      await submitConsultationBooking(form);
+      const { firstName, lastName, ...rest } = form;
+      await submitConsultationBooking({ name: `${firstName} ${lastName}`.trim(), ...rest });
       setState("done");
     } catch {
       setState("error");
@@ -29,7 +30,7 @@ export default function BookingForm() {
     return (
       <div className="text-center space-y-3 py-6">
         <CheckCircle2 className="w-10 h-10 text-brand-green mx-auto" />
-        <h3 className="font-serif text-2xl font-semibold text-brand-green">Thank you, {form.name.split(" ")[0]}</h3>
+        <h3 className="font-serif text-2xl font-semibold text-brand-green">Thank you, {form.firstName}</h3>
         <p className="text-sm text-brand-muted">We have your request and will confirm your consultation shortly.</p>
       </div>
     );
@@ -38,8 +39,11 @@ export default function BookingForm() {
   return (
     <form onSubmit={submit} className="space-y-4 text-left">
       <div>
-        <label className={label}>Full Name *</label>
-        <input required className={input} placeholder="Enter Your Full Name" value={form.name} onChange={set("name")} />
+        <label className={label}>Name <span className="text-red-600">*</span></label>
+        <div className="grid grid-cols-2 gap-3">
+          <input required className={input} placeholder="First Name" value={form.firstName} onChange={set("firstName")} />
+          <input required className={input} placeholder="Last Name" value={form.lastName} onChange={set("lastName")} />
+        </div>
       </div>
       <div>
         <label className={label}>Email Address *</label>
@@ -65,7 +69,7 @@ export default function BookingForm() {
       <button
         type="submit"
         disabled={state === "sending"}
-        className="w-full bg-brand-green hover:bg-brand-greenDark text-white rounded-md py-3.5 text-sm uppercase tracking-wide flex items-center justify-center gap-2 disabled:opacity-70"
+        className="w-full bg-brand-green hover:bg-brand-greenDark text-white rounded-md py-3.5 text-xs uppercase tracking-wide shadow-md flex items-center justify-center gap-2 disabled:opacity-70"
       >
         {state === "sending" ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</> : "BOOK MY FREE CONSULTATION"}
       </button>

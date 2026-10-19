@@ -73,22 +73,23 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#eee8dc]">
-      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-24 flex items-center justify-between">
         <Link href="/" aria-label={BRAND.name} className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BRAND.logo} alt={BRAND.name} className="h-12 w-auto" />
+          <img src={BRAND.logo} alt="Ichiban Stays logo" width={310} height={52} className="h-[52px] w-auto" />
         </Link>
-        <nav className="hidden lg:flex items-center gap-8">
-          {NAV.filter((n) => n.href !== "/contact/").map((n) => (
+        <nav className="hidden lg:flex items-center gap-8 ml-auto mr-8">
+          {NAV.map((n) => (
             <Desktop key={n.href + n.label} item={n} />
           ))}
-          <Link
-            href="/contact/"
-            className="inline-flex items-center px-5 py-2.5 rounded-[3px] bg-brand-green hover:bg-brand-greenDark text-white text-xs font-medium tracking-wider uppercase transition-colors"
-          >
-            Contact Us
-          </Link>
         </nav>
+        <Link
+          href="/book-a-consultation/"
+          target="_blank"
+          className="hidden lg:inline-flex items-center px-5 py-3 rounded-md bg-brand-green hover:bg-brand-greenDark text-white text-sm font-medium transition-colors"
+        >
+          Get Free Projection
+        </Link>
         <button className="lg:hidden p-2" aria-label="Menu" onClick={() => setOpen(!open)}>
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>

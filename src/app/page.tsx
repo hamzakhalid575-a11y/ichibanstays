@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
-  ArrowRight, BadgeCheck, BarChart3, Calculator, CalendarDays, Headset, Mail, MapPinned,
-  Phone, Banknote, Star, StarHalf, Users, Search, Check,
+  ArrowRight, BadgeCheck, BarChart3, Bath, BedDouble, Calculator, CalendarDays, CheckCircle2, Headset, Home,
+  LineChart, Mail, MapPin, Phone, Banknote, Star, StarHalf, Users, Search, Shield, ShoppingBag, User,
 } from "lucide-react";
 import ProjectionForm from "@/components/ProjectionForm";
 import { BRAND } from "@/lib/site";
@@ -47,8 +47,12 @@ const properties = [
 ];
 
 const services = [
-  "Serviced Accommodation", "Property Management", "Guaranteed Rent", "Corporate Lets",
-  "Short-Term Rental Management", "Property Valuation",
+  { Icon: Home, label: "Serviced Accommodation" },
+  { Icon: User, label: "Property Management" },
+  { Icon: Shield, label: "Guaranteed Rent" },
+  { Icon: ShoppingBag, label: "Corporate Lets" },
+  { Icon: CalendarDays, label: "Short-Term Rental Management" },
+  { Icon: LineChart, label: "Property Valuation" },
 ];
 const credentials = [
   "UK-Based Property Management", "Professional Serviced Accommodation", "Corporate & Leisure Stays",
@@ -56,166 +60,182 @@ const credentials = [
   "Trusted Property Management Solutions",
 ];
 
-const h = "font-serif font-medium text-brand-green";
+const sectionH = "font-serif font-medium text-brand-forest text-4xl sm:text-[44px] leading-tight";
+const aboutH = "font-serif font-semibold uppercase tracking-[0.12em] text-brand-forest text-2xl";
+const Rule = () => <div className="w-12 h-0.5 bg-brand-teal mt-3 mb-6" />;
 const outline =
-  "inline-flex items-center gap-2 px-6 py-3 border border-brand-green text-brand-green hover:bg-brand-green hover:text-white text-xs uppercase tracking-wide transition-colors";
+  "inline-flex items-center gap-2 px-6 py-3.5 border border-brand-forest text-brand-forest hover:bg-brand-forest hover:text-white text-xs font-medium uppercase tracking-wide transition-colors";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       {/* Hero */}
       <section
-        className="relative bg-cover bg-center"
+        className="relative bg-cover bg-center text-white"
         style={{ backgroundImage: `url(${UP}/2026/07/ChatGPT-Image-Jul-20-2026-07_10_17-PM-1.webp)` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/10" />
-        <div className="relative max-w-[1400px] mx-auto px-5 lg:px-8 pt-14 pb-8">
-          <div className="max-w-2xl">
-            <p className="font-serif text-xl font-semibold text-brand-green">Short Let Management Across the UK</p>
-            <h1 className="font-serif text-4xl sm:text-6xl font-medium text-brand-ink leading-[1.1] mt-3">
-              Unlock Higher Income <br />
-              with Short – Term Lettings <br />
-              <span className="text-[#2e5b3f]">Without the Hassle</span>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a26] via-[#1e3a26]/85 to-[#1e3a26]/0" />
+        <div className="relative max-w-[1440px] mx-auto px-5 lg:px-6 pt-12 pb-0">
+          <div className="max-w-[680px] border-l-2 border-brand-teal pl-8 -ml-1">
+            <p className="font-serif text-xl font-semibold text-white/80">Short Let Management Across the UK</p>
+            <h1 className="font-serif text-5xl sm:text-[56px] font-medium leading-[1.12] mt-3">
+              Unlock Higher Income <br />with Short – Term Lettings <br />Without the Hassle
             </h1>
-            <div className="font-body text-brand-muted mt-6 space-y-1">
+            <div className="font-body text-lg leading-relaxed mt-6 text-white/90">
               <p>We help UK landlords earn more through fully managed short-stay accommodation.</p>
               <p>We handle 100% of the work, so you enjoy higher returns without the day-to-day hassle.</p>
             </div>
-            <p className="flex items-center gap-2 mt-4 text-brand-green">
-              <BadgeCheck className="w-[18px] h-[18px]" /> <span className="text-brand-ink">No Upfront Fees</span>
+            <p className="flex items-center gap-2 mt-4">
+              <BadgeCheck className="w-5 h-5" /> No Upfront Fees
             </p>
             <div className="flex flex-wrap gap-4 mt-8 pb-10">
-              <a href="#booking-form" className="inline-flex items-center gap-2 px-6 py-3.5 bg-brand-green hover:bg-brand-greenDark text-white font-body transition-colors">
+              <a href="#booking-form" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-black font-medium shadow-md hover:bg-slate-100 transition-colors">
                 Get Your Free Assessment <ArrowRight className="w-4 h-4" />
               </a>
-              <Link href="/book-a-consultation/" className={outline}>BOOK A CONSULTATION</Link>
             </div>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 bg-white/80 backdrop-blur rounded-lg p-4 lg:w-[70%]">
-            {heroStats.map(({ Icon, value, label }) => (
-              <div key={label} className="flex items-center gap-3">
-                <Icon className="w-6 h-6 text-brand-green shrink-0" />
-                <div>
-                  <p className="font-serif text-2xl font-semibold text-brand-ink leading-none">{value}</p>
-                  <p className="text-xs text-brand-muted mt-1">{label}</p>
+          <div className="border-t border-white/25 mt-2 lg:w-[75%]">
+            <div className="grid grid-cols-2 lg:grid-cols-4 py-8">
+              {heroStats.map(({ Icon, value, label }) => (
+                <div key={label} className="flex items-center gap-3 px-5 border-l border-white/25 first:border-l-0 lg:first:border-l">
+                  <Icon className="w-7 h-7 shrink-0" />
+                  <div>
+                    <p className="font-serif text-3xl leading-none whitespace-nowrap">{value}</p>
+                    <p className="text-sm mt-1 text-white/85">{label}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* 5 steps */}
-      <section className="max-w-[1400px] mx-auto px-5 lg:px-8 py-14">
-        <p className="text-brand-muted">How It Works</p>
-        <h2 className={`${h} text-4xl sm:text-5xl mt-1`}>Our Simple 5 Step Process</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-10">
+      <section className="max-w-[1440px] mx-auto px-5 lg:px-5 pt-24 pb-16">
+        <p className="font-serif italic text-xl text-brand-teal">How It Works</p>
+        <h2 className={`${sectionH} mt-2`}>Our Simple 5 Step Process</h2>
+        <div className="relative grid sm:grid-cols-2 lg:grid-cols-5 gap-y-10 mt-14">
+          <div className="hidden lg:block absolute top-9 left-[10%] right-[10%] h-px bg-brand-teal/40" />
           {steps.map(({ Icon, title, text }, i) => (
-            <div key={title} className="text-center">
-              <div className="w-20 h-20 rounded-full bg-brand-sage text-brand-green flex items-center justify-center mx-auto">
-                <Icon className="w-9 h-9" />
+            <div key={title} className="relative text-center px-3">
+              <div className="w-[72px] h-[72px] rounded-full bg-white border border-slate-300 text-brand-forest flex items-center justify-center mx-auto">
+                <Icon className="w-8 h-8" strokeWidth={2.5} />
               </div>
-              <p className="font-semibold text-brand-green mt-3">{i + 1}</p>
-              <h3 className="font-semibold mt-1">{title}</h3>
-              <p className="font-body text-sm text-brand-muted mt-2">{text}</p>
+              <p className="font-serif text-3xl text-brand-teal mt-5">{i + 1}</p>
+              <h3 className="font-medium mt-2 max-w-[120px] mx-auto leading-relaxed">{title}</h3>
+              <p className="font-body text-[17px] text-slate-700 mt-5 leading-8">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Performance */}
-      <section className="bg-brand-sage">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-8 py-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="max-w-[1440px] mx-auto px-5">
+        <div className="border-b border-slate-200 pb-16 pt-10 grid grid-cols-2 lg:grid-cols-4">
           {performance.map(({ Icon, value, label }) => (
-            <div key={label} className="flex items-center gap-3">
-              <Icon className="w-6 h-6 text-brand-green shrink-0" />
-              <div>
-                <p className="font-serif text-3xl font-semibold text-brand-ink leading-none">{value}</p>
-                <p className="text-sm text-brand-muted mt-1">{label}</p>
+            <div key={label} className="flex flex-col items-center lg:items-start border-l border-slate-400 first:border-l-0 px-10">
+              <div className="flex items-center gap-4">
+                <Icon className="w-7 h-7 text-brand-teal shrink-0" />
+                <p className="font-serif text-4xl font-medium text-brand-forest">{value}</p>
               </div>
+              <p className="font-body text-slate-700 mt-1 ml-11">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Lead form */}
-      <section id="booking-form" className="max-w-[1400px] mx-auto px-5 lg:px-8 py-14">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-serif text-4xl sm:text-5xl font-semibold text-black">
-            Get Your Free <span className="text-[#2e5b3f]">Income Projection</span>
-          </h2>
-          <p className="font-body text-brand-muted mt-3 mb-8">
-            Discover how much your property could earn with professionally managed short-term letting
-          </p>
-          <div className="text-left"><ProjectionForm /></div>
+      <section
+        id="booking-form"
+        className="relative bg-cover bg-center mt-20"
+        style={{ backgroundImage: `url(${UP}/2026/08/WhatsApp-Image-2026-08-03-at-7.50.19-PM-1-1.webp)` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2c4834] via-[#2c4834]/85 to-[#2c4834]/10" />
+        <div className="relative max-w-[640px] mx-auto px-5 py-28">
+          <ProjectionForm />
         </div>
       </section>
 
       {/* Properties */}
-      <section className="max-w-[1400px] mx-auto px-5 lg:px-8 py-10">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className={`${h} text-4xl sm:text-5xl`}>Handpicked Properties We Manage</h2>
-          <Link href="/book-a-consultation/" className={outline}>BOOK A CONSULTATION <ArrowRight className="w-3.5 h-3.5" /></Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-          {properties.map((p) => (
-            <Link key={p.title} href="/book-a-consultation/" className="group block">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.img} alt={p.alt} className="w-full aspect-[4/3] object-cover" />
-              <h3 className="font-serif text-2xl font-semibold mt-3 group-hover:text-brand-green">{p.title}</h3>
-              <p className="text-sm text-brand-muted">London</p>
-              <p className="flex gap-4 text-sm mt-2 text-brand-ink">
-                <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-green" />{p.beds} Bed</span>
-                <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-green" />{p.baths} Bath</span>
-              </p>
-            </Link>
-          ))}
+      <section className="bg-[#f3f5f2]">
+        <div className="max-w-[1440px] mx-auto px-5 py-24">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h2 className={sectionH}>Handpicked Properties We Manage</h2>
+            <Link href="/book-a-consultation/" className={outline}>BOOK A CONSULTATION <ArrowRight className="w-4 h-4" /></Link>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            {properties.map((p) => (
+              <Link key={p.title} href="/book-a-consultation/" className="group block bg-white rounded-md shadow-sm overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.img} alt={p.alt} className="w-full aspect-[4/3] object-cover" />
+                <div className="px-8 pt-8 pb-6">
+                  <h3 className="font-serif text-[26px] font-medium group-hover:text-brand-green">{p.title}</h3>
+                  <p className="text-sm text-brand-teal mt-2">London</p>
+                  <div className="border-t border-slate-200 mt-6 pt-5 flex justify-center gap-8 text-sm text-slate-700">
+                    <span className="flex items-center gap-2"><BedDouble className="w-4 h-4 text-brand-green" />{p.beds} Bed</span>
+                    <span className="flex items-center gap-2"><Bath className="w-4 h-4 text-brand-green" />{p.baths} Bath</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* About / services / contact / credentials */}
-      <section className="bg-brand-cream">
-        <div className="max-w-[1400px] mx-auto px-5 lg:px-8 py-12 grid lg:grid-cols-2 gap-x-16 gap-y-12">
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={BRAND.logo} alt="Ichiban Stays" className="h-16 w-auto" />
-            <p className="font-serif text-xl font-semibold text-brand-green mt-2">Fully Managed Short Stay Properties</p>
-            <h3 className="font-serif text-2xl font-black text-brand-green mt-8">About US</h3>
-            <hr className="w-[15%] border-brand-green my-3" />
-            <p className="font-body text-brand-muted leading-relaxed">
-              Ichiban Stays is a UK property management company specialising in fully managed short stay and serviced
-              accommodation. We help landlords maximise rental income while providing exceptional stays for corporate
-              travellers, professionals, families and leisure guests. From guest communication and housekeeping to pricing
-              optimisation and maintenance, we handle everything – so you don&apos;t have to.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-serif text-2xl font-black text-brand-green">OUR SERVICES</h3>
-            <hr className="w-[15%] border-brand-green my-3" />
-            <ul className="divide-y divide-slate-200">
-              {services.map((s) => (
-                <li key={s} className="flex items-center gap-3 py-2.5"><BadgeCheck className="w-5 h-5 text-brand-green" />{s}</li>
-              ))}
-            </ul>
-          </div>
-          <div id="contact">
-            <h3 className="font-serif text-2xl font-black text-brand-green">CONTACT</h3>
-            <hr className="w-[15%] border-brand-green my-3" />
-            <ul className="divide-y divide-slate-200">
-              <li className="flex items-center gap-4 py-4"><Mail className="w-6 h-6 text-brand-green" /><div><h4 className="font-semibold">Email</h4><a href={`mailto:${BRAND.email}`} className="text-brand-muted">{BRAND.email}</a></div></li>
-              <li className="flex items-center gap-4 py-4"><Phone className="w-6 h-6 text-brand-green" /><div><h4 className="font-semibold">Phone</h4><a href={BRAND.phoneHref} className="text-brand-muted">{BRAND.phone}</a></div></li>
-              <li className="flex items-center gap-4 py-4"><MapPinned className="w-6 h-6 text-brand-green" /><div><h4 className="font-semibold">Address</h4><p className="text-brand-muted">{BRAND.address.map((l) => <React.Fragment key={l}>{l}<br /></React.Fragment>)}</p></div></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-serif text-2xl font-black text-brand-green">OUR CREDENTIALS</h3>
-            <hr className="w-[15%] border-brand-green my-3" />
-            <ul className="divide-y divide-slate-200">
-              {credentials.map((s) => (
-                <li key={s} className="flex items-center gap-3 py-2.5"><BadgeCheck className="w-5 h-5 text-brand-green" />{s}</li>
-              ))}
-            </ul>
-          </div>
+      <section className="max-w-[1440px] mx-auto px-5 py-20 grid lg:grid-cols-[1.1fr_1fr_1.1fr_1.1fr] gap-x-10 gap-y-12">
+        <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={BRAND.logo} alt="Ichiban Stays" className="h-14 w-auto shadow-sm" />
+          <p className="font-serif italic text-xl text-brand-green mt-4">Fully Managed Short Stay Properties</p>
+          <h3 className={`${aboutH} mt-16 normal-case tracking-normal`}>About US</h3>
+          <Rule />
+          <p className="font-body text-slate-700 leading-8">
+            Ichiban Stays is a UK property management company specialising in fully managed short stay and serviced
+            accommodation. We help landlords maximise rental income while providing exceptional stays for corporate
+            travellers, professionals, families and leisure guests. From guest communication and housekeeping to pricing
+            optimisation and maintenance, we handle everything – so you don&apos;t have to.
+          </p>
+        </div>
+        <div>
+          <h3 className={aboutH}>OUR SERVICES</h3>
+          <Rule />
+          <ul>
+            {services.map(({ Icon, label }) => (
+              <li key={label} className="flex items-center gap-5 py-3.5 border-b border-slate-200 last:border-0 w-[210px]">
+                <Icon className="w-8 h-8 text-brand-green shrink-0" />
+                <span className="text-slate-700 leading-snug">{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div id="contact">
+          <h3 className={aboutH}>CONTACT</h3>
+          <Rule />
+          <ul>
+            {[
+              { Icon: Mail, t: "Email", v: <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a> },
+              { Icon: Phone, t: "Phone", v: <a href={BRAND.phoneHref} className="text-blue-700">{BRAND.phone}</a> },
+              { Icon: MapPin, t: "Address", v: <>{BRAND.address.map((l) => <React.Fragment key={l}>{l}<br /></React.Fragment>)}</> },
+            ].map(({ Icon, t, v }) => (
+              <li key={t} className="flex gap-5 py-6 border-b border-slate-200 last:border-0">
+                <span className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0"><Icon className="w-5 h-5 text-brand-forest" /></span>
+                <div><h4 className="font-serif text-2xl font-semibold leading-none mb-2">{t}</h4><div className="text-slate-800 leading-6">{v}</div></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 className={aboutH}>OUR CREDENTIALS</h3>
+          <Rule />
+          <ul>
+            {credentials.map((s) => (
+              <li key={s} className="flex items-center gap-4 py-3.5 border-b border-slate-200 last:border-0">
+                <CheckCircle2 className="w-6 h-6 text-brand-forest shrink-0" />
+                <span className="text-slate-700 leading-snug">{s}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>

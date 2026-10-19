@@ -50,12 +50,16 @@ for x in published.values():
         kind=x['type'], slug=x['slug'], title=x['title'], seoTitle=t, description=d,
         date=x['date'][:10], categories=[c for c in x['cats'] if c], html=clean(x['content']),
         image=atts.get(x['meta'].get('_thumbnail_id', ''), ''))
-# Privacy policy is a draft in WP but linked from the footer; ship it.
-for x in items:
-    if x['type'] == 'page' and x['slug'] == 'privacy-policy':
-        t, d = seo(x)
-        pages['/privacy-policy/'] = dict(kind='page', slug='privacy-policy', title=x['title'], seoTitle=t,
-                                         description=d, date=x['date'][:10], categories=[], html=clean(x['content']), image='')
+# Titles and descriptions as rendered by the live site (Yoast), crawled into live-meta.json.
+import os
+from urllib.parse import urlparse
+LIVE = 'src/content/live-meta.json'
+if os.path.exists(LIVE):
+    for url, m in json.load(open(LIVE)).items():
+        p = pages.get(urlparse(url).path or '/')
+        if p:
+            p['seoTitle'] = m['title'] or p['seoTitle']
+            p['description'] = m['desc'] or p['description']
 
 # Navigation tree
 nav = {x['id']: x for x in items if x['type'] == 'nav_menu_item' and x['status'] == 'publish'}

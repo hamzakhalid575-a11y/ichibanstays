@@ -14,10 +14,10 @@ export default function ProjectionForm() {
     addressLine2: "",
     postcode: "",
     sizeSqFt: "",
-    bathrooms: "1 Bathroom",
-    receptionRooms: "1",
-    bedrooms: "2 Bedrooms",
-    propertyType: "Apartment",
+    bathrooms: "",
+    receptionRooms: "",
+    bedrooms: "",
+    propertyType: "",
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -52,203 +52,64 @@ export default function ProjectionForm() {
     );
   }
 
+  const field =
+    "w-full px-4 py-3 border border-[#dcdcdc] bg-[#fafafa] text-[15px] text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-brand-green";
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    setForm({ ...form, [k]: e.target.value });
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 space-y-5 text-slate-900"
+      className="bg-white border-t-4 border-brand-teal rounded-md shadow-xl p-8 sm:p-14 space-y-4 text-slate-900"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            First Name *
-          </label>
-          <input
-            type="text"
-            required
-            value={form.firstName}
-            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-            placeholder="First"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Last Name *
-          </label>
-          <input
-            type="text"
-            required
-            value={form.lastName}
-            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-            placeholder="Last"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
+      <div className="text-center mb-6">
+        <h3 className="font-serif text-3xl sm:text-4xl font-medium text-brand-forest">Get Your Free Income Projection</h3>
+        <p className="mt-2 text-[17px] text-slate-700 max-w-md mx-auto">
+          Discover how much your property could earn with professionally managed short-term letting
+        </p>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Email *
-          </label>
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            placeholder="you@example.com"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Phone Number *
-          </label>
-          <input
-            type="tel"
-            required
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="+44 7..."
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <input required className={field} placeholder="First Name" value={form.firstName} onChange={set("firstName")} />
+        <input required className={field} placeholder="Last Name" value={form.lastName} onChange={set("lastName")} />
+        <input required type="email" className={field} placeholder="Email Address" value={form.email} onChange={set("email")} />
+        <input required type="tel" className={field} placeholder="Phone Number" value={form.phone} onChange={set("phone")} />
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Property Address (Line 1)
-          </label>
-          <input
-            type="text"
-            value={form.addressLine1}
-            onChange={(e) => setForm({ ...form, addressLine1: e.target.value })}
-            placeholder="e.g. 25 Hill Street"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Property Address (Line 2)
-          </label>
-          <input
-            type="text"
-            value={form.addressLine2}
-            onChange={(e) => setForm({ ...form, addressLine2: e.target.value })}
-            placeholder="Neighbourhood / City"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
+      <input required className={field} placeholder="Property Address (Line 1)" value={form.addressLine1} onChange={set("addressLine1")} />
+      <input className={field} placeholder="Property Address (Line 2)" value={form.addressLine2} onChange={set("addressLine2")} />
+      <div className="grid sm:grid-cols-2 gap-4">
+        <input required className={field} placeholder="Postcode" value={form.postcode} onChange={set("postcode")} />
+        <input type="number" className={field} placeholder="Approx. Size (sq ft)" value={form.sizeSqFt} onChange={set("sizeSqFt")} />
+        <select className={field} value={form.bathrooms} onChange={set("bathrooms")}>
+          <option value="">Bathrooms</option>
+          {["1", "2", "3", "4", "5+"].map((o) => <option key={o}>{o}</option>)}
+        </select>
+        <select className={field} value={form.receptionRooms} onChange={set("receptionRooms")}>
+          <option value="">Reception Room</option>
+          {["1", "2", "3", "4+"].map((o) => <option key={o}>{o}</option>)}
+        </select>
+        <select className={field} value={form.bedrooms} onChange={set("bedrooms")}>
+          <option value="">Bedrooms</option>
+          {["Studio", "1", "2", "3", "4", "5+"].map((o) => <option key={o}>{o}</option>)}
+        </select>
+        <select className={field} value={form.propertyType} onChange={set("propertyType")}>
+          <option value="">Property Type</option>
+          {["Flat / Apartment", "House", "Studio", "Other"].map((o) => <option key={o}>{o}</option>)}
+        </select>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Postcode
-          </label>
-          <input
-            type="text"
-            value={form.postcode}
-            onChange={(e) => setForm({ ...form, postcode: e.target.value })}
-            placeholder="e.g. W1J 5LW"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Approx. Size (sq ft)
-          </label>
-          <input
-            type="number"
-            value={form.sizeSqFt}
-            onChange={(e) => setForm({ ...form, sizeSqFt: e.target.value })}
-            placeholder="e.g. 850"
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Property Type
-          </label>
-          <select
-            value={form.propertyType}
-            onChange={(e) => setForm({ ...form, propertyType: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          >
-            {["Apartment", "House", "Studio Flat", "Bungalow", "Other"].map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Bedrooms
-          </label>
-          <select
-            value={form.bedrooms}
-            onChange={(e) => setForm({ ...form, bedrooms: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          >
-            {["1 Bedroom", "2 Bedrooms", "3 Bedrooms", "4 Bedrooms", "5+ Bedrooms"].map((b) => (
-              <option key={b} value={b}>{b}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Bathrooms
-          </label>
-          <select
-            value={form.bathrooms}
-            onChange={(e) => setForm({ ...form, bathrooms: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          >
-            {["1 Bathroom", "2 Bathrooms", "3 Bathrooms", "4 Bathrooms", "5+ Bathrooms"].map((b) => (
-              <option key={b} value={b}>{b}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
-            Reception Rooms
-          </label>
-          <select
-            value={form.receptionRooms}
-            onChange={(e) => setForm({ ...form, receptionRooms: e.target.value })}
-            className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2F5E3A]"
-          >
-            {["1", "2", "3", "More"].map((r) => (
-              <option key={r} value={r}>{r}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
       {error && <p className="text-sm text-red-600">{error}</p>}
       <button
         type="submit"
         disabled={submitting}
-        className="w-full bg-[#2F5E3A] hover:bg-[#244a2e] text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wider"
+        className="w-full bg-brand-forest hover:bg-black text-white font-semibold py-4 tracking-widest text-sm uppercase flex items-center justify-center gap-2 transition-colors disabled:opacity-70"
       >
-        {submitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" /> Sending...
-          </>
-        ) : (
-          <>
-            GET MY FREE PROJECTION
-          </>
-        )}
+        {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</> : "GET MY PROJECTION"}
       </button>
-
-      <div className="flex items-center justify-center gap-6 text-xs text-slate-500 pt-1">
-        <span>✓ Free</span>
-        <span>✓ No Obligation</span>
-        <span>✓ Takes 30 Seconds</span>
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[15px] text-slate-700 pt-2">
+        {["Free", "No Obligation", "Takes 30 Seconds"].map((t) => (
+          <span key={t} className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 fill-brand-teal text-white" /> {t}
+          </span>
+        ))}
       </div>
     </form>
   );
