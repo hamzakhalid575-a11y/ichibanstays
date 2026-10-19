@@ -73,10 +73,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#eee8dc]">
-      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-24 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-16 md:h-24 flex items-center justify-between">
         <Link href="/" aria-label={BRAND.name} className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BRAND.logo} alt="Ichiban Stays logo" width={310} height={52} className="h-[52px] w-auto" />
+          <img src={BRAND.logo} alt="Ichiban Stays logo" width={310} height={52} className="h-9 md:h-[52px] w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-8 ml-auto mr-8">
           {NAV.map((n) => (

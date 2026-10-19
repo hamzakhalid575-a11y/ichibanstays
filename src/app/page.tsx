@@ -76,9 +76,9 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a26] via-[#1e3a26]/85 to-[#1e3a26]/0" />
         <div className="relative max-w-[1440px] mx-auto px-5 lg:px-6 pt-12 pb-0">
-          <div className="max-w-[680px] border-l-2 border-brand-teal pl-8 -ml-1">
+          <div className="max-w-[680px] border-l-2 border-brand-teal pl-4 sm:pl-8 -ml-1">
             <p className="font-serif text-xl font-semibold text-white/80">Short Let Management Across the UK</p>
-            <h1 className="font-serif text-5xl sm:text-[56px] font-medium leading-[1.12] mt-3">
+            <h1 className="font-serif text-[34px] sm:text-[56px] font-medium leading-[1.15] mt-3">
               Unlock Higher Income <br />with Short – Term Lettings <br />Without the Hassle
             </h1>
             <div className="font-body text-lg leading-relaxed mt-6 text-white/90">

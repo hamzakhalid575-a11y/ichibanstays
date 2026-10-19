@@ -43,7 +43,7 @@ export default function Footer() {
         aria-label="WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed right-6 bottom-[77px] z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-lg flex items-center justify-center"
+        className="fixed right-6 bottom-[77px] max-md:bottom-[92px] z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-lg flex items-center justify-center"
       >
         <MessageCircle className="w-8 h-8 text-white" />
       </a>
