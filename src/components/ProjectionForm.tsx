@@ -53,14 +53,14 @@ export default function ProjectionForm() {
   }
 
   const field =
-    "w-full px-4 py-3 border border-[#dcdcdc] bg-[#fafafa] text-[15px] text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-brand-green";
+    "w-full px-4 py-3 max-sm:rounded-lg border border-[#dcdcdc] bg-[#fafafa] text-[15px] text-slate-800 placeholder:text-slate-500 focus:outline-none focus:border-brand-green";
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border-t-4 border-brand-teal rounded-md shadow-xl p-8 sm:p-14 space-y-4 text-slate-900"
+      className="bg-white border-t-4 border-brand-teal rounded-md shadow-xl p-5 sm:p-14 max-sm:rounded-2xl space-y-4 text-slate-900"
     >
       <div className="text-center mb-6">
         <h3 className="font-serif text-3xl sm:text-4xl font-medium text-brand-forest">Get Your Free Income Projection</h3>
@@ -68,15 +68,19 @@ export default function ProjectionForm() {
           Discover how much your property could earn with professionally managed short-term letting
         </p>
       </div>
-      <div className="grid sm:grid-cols-2 gap-4">
+      <p className="md:hidden text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-teal border-b border-slate-200 pb-2 pt-2">Your Details</p>
+      <div className="grid grid-cols-2 gap-4">
         <input required className={field} placeholder="First Name" value={form.firstName} onChange={set("firstName")} />
         <input required className={field} placeholder="Last Name" value={form.lastName} onChange={set("lastName")} />
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4">
         <input required type="email" className={field} placeholder="Email Address" value={form.email} onChange={set("email")} />
         <input required type="tel" className={field} placeholder="Phone Number" value={form.phone} onChange={set("phone")} />
       </div>
+      <p className="md:hidden text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-teal border-b border-slate-200 pb-2 pt-2">Your Property</p>
       <input required className={field} placeholder="Property Address (Line 1)" value={form.addressLine1} onChange={set("addressLine1")} />
       <input className={field} placeholder="Property Address (Line 2)" value={form.addressLine2} onChange={set("addressLine2")} />
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <input required className={field} placeholder="Postcode" value={form.postcode} onChange={set("postcode")} />
         <input type="number" className={field} placeholder="Approx. Size (sq ft)" value={form.sizeSqFt} onChange={set("sizeSqFt")} />
         <select className={field} value={form.bathrooms} onChange={set("bathrooms")}>

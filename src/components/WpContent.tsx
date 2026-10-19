@@ -6,10 +6,10 @@ const PROJECTION = '<div data-projection-form></div>';
 const BOOKING = '<div data-booking-form></div>';
 
 /** Renders WordPress HTML; the WPForms shortcode becomes the lead form. */
-export default function WpContent({ html }: { html: string }) {
+export default function WpContent({ html, post = false, plain = false }: { html: string; post?: boolean; plain?: boolean }) {
   const parts = html.split(/(<div data-(?:projection|booking)-form><\/div>)/);
   return (
-    <div className="wp-content">
+    <div className={`wp-content${post ? " is-post" : ""}${plain ? " is-plain" : ""}`}>
       {parts.map((part, i) =>
         part === PROJECTION ? (
           <div key={i} id="booking-form" className="my-8"><ProjectionForm /></div>

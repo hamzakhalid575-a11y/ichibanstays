@@ -50,7 +50,7 @@ for x in published.values():
     pages[path_for(x)] = dict(
         kind=x['type'], slug=x['slug'], title=x['title'], seoTitle=t, description=d,
         date=x['date'][:10], order=f"{x['date']}-{int(x['id']):08d}", categories=[c for c in x['cats'] if c], html=clean(x['content']),
-        image=atts.get(x['meta'].get('_thumbnail_id', ''), ''))
+        image=atts.get(x['meta'].get('_thumbnail_id', ''), '').replace(SITE, ''))
 # Titles and descriptions as rendered by the live site (Yoast), crawled into live-meta.json.
 import os
 from urllib.parse import urlparse

@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PAGES, pathFor } from "@/lib/site";
+import { PAGES, pathFor, metadataFor } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
 import WpContent from "@/components/WpContent";
 import { CalendarDays, LockOpen, Shield, UserCog } from "lucide-react";
 import BookingForm from "@/components/BookingForm";
@@ -20,7 +21,7 @@ function PostNav({ slug }: { slug: string }) {
   const prev = POSTS[i - 1];
   const next = POSTS[i + 1];
   return (
-    <nav aria-label="Posts" className="max-w-[780px] mx-auto px-5 pb-16 grid sm:grid-cols-2 gap-6 text-sm">
+    <nav aria-label="Posts" className="max-w-[700px] mx-auto px-5 pb-16 grid sm:grid-cols-2 gap-6 text-sm">
       <div>
         {prev && (
           <Link href={prev[0]} rel="prev" className="block border-t border-slate-200 pt-4 hover:text-brand-green">
@@ -46,14 +47,8 @@ function find(slug: string) {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const page = find(params.slug);
-  if (!page) return {};
-  return {
-    title: page.seoTitle || `${page.title} | Ichiban Stays`,
-    description: page.description || undefined,
-    alternates: { canonical: pathFor(params.slug) },
-    openGraph: page.image ? { images: [page.image] } : undefined,
-  };
+  if (!find(params.slug)) return {};
+  return metadataFor(pathFor(params.slug));
 }
 
 function Consultation({ html }: { html: string }) {
@@ -63,21 +58,21 @@ function Consultation({ html }: { html: string }) {
     <>
       <section
         className="relative bg-cover bg-center"
-        style={{ backgroundImage: "url(https://ichibanstays.com/wp-content/uploads/2026/10/ichiban-hero-living-room.webp)" }}
+        style={{ backgroundImage: "url(/wp-content/uploads/2026/07/ea1c886d-00d7-476f-80ca-1c32043767d7.webp)" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-white/0" />
-        <div className="relative max-w-[1440px] mx-auto px-5 py-14 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-          <div className="pt-4">
-            <p className="text-[15px] tracking-wide uppercase text-[#a08b5b]">Premium Property Management</p>
-            <h1 className="font-serif text-5xl sm:text-6xl font-medium text-brand-ink leading-[1.3] mt-2">
+        <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/25 to-white/0" />
+        <div className="relative max-w-[1400px] mx-auto px-5 pt-[50px] pb-[30px] grid lg:grid-cols-[65fr_35fr] gap-10 items-start">
+          <div className="lg:pr-[60px]">
+            <p className="text-base uppercase text-[#a28d62]">Premium Property Management</p>
+            <h1 className="font-serif text-[40px] sm:text-[58px] font-medium text-brand-ink leading-[1.4]">
               Maximise Your <br />Rental Income. <br />
-              <span className="text-brand-green">We Handle <br />Everything.</span>
+              <span className="text-[#2e5b3f]">We Handle <br />Everything.</span>
             </h1>
-            <div className="font-body text-sm text-brand-ink mt-4 max-w-[300px] leading-6">
+            <div className="font-body text-sm text-brand-ink mt-1 max-w-[300px] leading-[1.45] lg:pr-0">
               We help UK landlords earn more through fully managed short stay accommodation. We handle everything so you
               enjoy higher returns without the day-to-day hassle.
             </div>
-            <div className="grid grid-cols-3 mt-24 max-w-[580px] rounded-lg bg-[#4d5d45]/90 text-white text-center py-4">
+            <div className="grid grid-cols-3 mt-12 lg:mt-[100px] max-w-[730px] rounded-[15px] bg-[#082112]/[0.68] text-white text-center p-5">
               {[
                 [Shield, "No Upfront Fees", "100% free to get started"],
                 [UserCog, "Dedicated Manager", "One point of contact"],
@@ -86,18 +81,23 @@ function Consultation({ html }: { html: string }) {
                 const I = Icon as typeof Shield;
                 return (
                   <div key={t as string} className="px-2">
-                    <I className="w-9 h-9 mx-auto text-[#b79b5a]" />
-                    <h3 className="font-semibold text-sm mt-2">{t as string}</h3>
-                    <p className="text-xs">{d as string}</p>
+                    <I className="w-10 h-10 mx-auto text-[#a28d62]" />
+                    <h3 className="font-semibold text-xs sm:text-lg mt-2 [text-shadow:0_0_10px_rgba(0,0,0,0.3)]">{t as string}</h3>
+                    <p className="text-[10px] sm:text-sm">{d as string}</p>
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <CalendarDays className="w-7 h-7 mx-auto text-brand-green" />
-            <h2 className="text-xl font-semibold text-center text-brand-green mt-3">Book Your Free Consultation</h2>
-            <p className="text-sm text-slate-500 text-center my-5">
+          <div className="bg-white rounded-[15px] shadow-xl pt-[33px] px-6 sm:px-10 pb-[30px]">
+            <CalendarDays className="w-7 h-7 mx-auto text-[#a28d62]" />
+            <h2 className="text-2xl font-semibold text-center text-[#2e5b3f] mt-2">Book Your Free Consultation</h2>
+            <div className="flex items-center justify-center gap-2 my-4 mx-auto w-[40%]" aria-hidden="true">
+              <span className="flex-1 h-px bg-[#a28d62]" />
+              <span className="w-2 h-2 rotate-45 border border-[#a28d62]" />
+              <span className="flex-1 h-px bg-[#a28d62]" />
+            </div>
+            <p className="text-[15px] text-slate-500 text-center mb-7 leading-[1.7]">
               Schedule a no-obligation consultation with one of our property specialists to discuss how we can maximise
               your rental income.
             </p>
@@ -105,8 +105,8 @@ function Consultation({ html }: { html: string }) {
           </div>
         </div>
       </section>
-      <section className="px-5 py-16">
-        <WpContent html={rest} />
+      <section className="px-5 py-[60px]">
+        <WpContent html={rest} plain />
       </section>
     </>
   );
@@ -116,12 +116,20 @@ export default function WpPage({ params }: { params: { slug: string } }) {
   const page = find(params.slug);
   if (!page) return notFound();
 
-  if (params.slug === "book-a-consultation") return <Consultation html={page.html} />;
+  const path = pathFor(params.slug);
+  if (params.slug === "book-a-consultation")
+    return (
+      <>
+        <JsonLd path={path} />
+        <Consultation html={page.html} />
+      </>
+    );
 
   const isPost = page.kind === "post";
   return (
     <article>
-      <header className="page-hero">
+      <JsonLd path={path} />
+      <header className={`page-hero${isPost ? " is-post" : ""}`}>
         <h1>{page.title}</h1>
         {isPost && (
           <p className="meta">
@@ -131,11 +139,7 @@ export default function WpPage({ params }: { params: { slug: string } }) {
         )}
       </header>
       <div className="px-5 pt-12 pb-16">
-        {isPost && page.image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={page.image} alt="" className="w-full max-w-[780px] mx-auto rounded-lg mb-10" />
-        )}
-        <WpContent html={page.html} />
+        <WpContent html={page.html} post={isPost} />
       </div>
       {isPost && <PostNav slug={params.slug} />}
     </article>

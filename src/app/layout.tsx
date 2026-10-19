@@ -7,15 +7,19 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Short Let Management London | Ichiban Stays", template: "%s" },
-  description:
-    "Short let management in London for UK landlords. Ichiban Stays handles bookings, guests, cleaning and compliance, with no upfront fees. Get a free projection.",
-  icons: { icon: "https://ichibanstays.com/wp-content/uploads/2026/07/cropped-Ichiban-Stays-Logo5.png" },
+  title: { default: "Short Let Management London & UK | Ichiban Stays", template: "%s" },
+  icons: {
+    icon: [
+      { url: "/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-01-at-6.20.17-PM-150x150.jpeg", sizes: "32x32" },
+      { url: "/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-01-at-6.20.17-PM-300x300.jpeg", sizes: "192x192" },
+    ],
+    apple: "/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-01-at-6.20.17-PM-300x300.jpeg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
+    <html lang="en-US">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

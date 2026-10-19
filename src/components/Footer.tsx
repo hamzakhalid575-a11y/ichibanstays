@@ -15,9 +15,9 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-brand-footer text-white border-t-[3px] border-slate-300/60">
-        <div className="max-w-[1440px] mx-auto px-8 py-8 grid gap-6 md:grid-cols-3 items-center">
+        <div className="max-w-[1440px] mx-auto px-5 md:px-8 py-11 grid gap-6 md:grid-cols-3 items-center">
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-14 h-14 fill-white" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="w-20 h-20 fill-white" aria-hidden="true">
               <path d="M12 4L4 7.9V20h16V7.9L12 4zm6.5 14.5H14V13h-4v5.5H5.5V8.8L12 5.7l6.5 3.1v9.7z" />
             </svg>
             <p>Your Property. Our Property</p>
@@ -26,7 +26,7 @@ export default function Footer() {
             © 2026 Ichiban Stays. All Rights Reserved.
             <br /> Registered in England &amp; Wales.
           </p>
-          <ul className="flex md:justify-end gap-3">
+          <ul className="flex justify-end gap-3">
             {social.map((s) => (
               <li key={s.label}>
                 <a
@@ -46,9 +46,9 @@ export default function Footer() {
         aria-label="WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed right-6 bottom-[77px] max-md:bottom-[92px] z-40 w-14 h-14 rounded-full bg-[#25D366] shadow-lg flex items-center justify-center"
+        className="fixed right-6 bottom-[77px] max-md:bottom-[92px] z-40 w-10 h-10 rounded-md bg-[#25D366] shadow-lg flex items-center justify-center"
       >
-        <MessageCircle className="w-8 h-8 text-white" />
+        <MessageCircle className="w-6 h-6 text-white" />
       </a>
     </>
   );

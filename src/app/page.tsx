@@ -6,16 +6,12 @@ import {
   LineChart, Mail, MapPin, Phone, Banknote, Star, StarHalf, Users, Search, Shield, ShoppingBag, User,
 } from "lucide-react";
 import ProjectionForm from "@/components/ProjectionForm";
-import { BRAND } from "@/lib/site";
+import { BRAND, metadataFor } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
 
-const UP = "https://ichibanstays.com/wp-content/uploads";
+const UP = "/wp-content/uploads";
 
-export const metadata: Metadata = {
-  title: "Short Let Management London | Ichiban Stays",
-  description:
-    "Short let management in London for UK landlords. Ichiban Stays handles bookings, guests, cleaning and compliance, with no upfront fees. Get a free projection.",
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = metadataFor("/");
 
 const heroStats = [
   { Icon: Users, value: "98%", label: "Average Occupancy" },
@@ -25,11 +21,11 @@ const heroStats = [
 ];
 
 const steps = [
-  { Icon: Search, title: "Free Property Assessment", text: "We evaluate your property and its short stay potential." },
-  { Icon: Headset, title: "Income Projection", text: "Receive a tailored income projection and strategy." },
-  { Icon: Calculator, title: "Prepare & List", text: "We prepare your property and list it on top platforms." },
-  { Icon: Users, title: "Guest Management", text: "We handle guests, cleaning, maintenance & support." },
-  { Icon: Banknote, title: "Monthly Payments", text: "Receive your rental income with a clear monthly statement." },
+  { Icon: Search, title: "Free Property\nAssessment", text: "We evaluate your property\nand its short stay potential." },
+  { Icon: Headset, title: "Income\nProjection", text: "Receive a tailored income projection and strategy." },
+  { Icon: Calculator, title: "Prepare & List", text: "We prepare your property and\n list it on top platforms." },
+  { Icon: Users, title: "Guest\nManagement", text: "We handle guests, cleaning,\nmaintenance & support." },
+  { Icon: Banknote, title: "Monthly\nPayments", text: "Receive your rental income\nwith a clear monthly statement." },
 ];
 
 const performance = [
@@ -61,7 +57,7 @@ const credentials = [
 ];
 
 const sectionH = "font-serif font-medium text-brand-forest text-4xl sm:text-[44px] leading-tight";
-const aboutH = "font-serif font-semibold uppercase tracking-[0.12em] text-brand-forest text-2xl";
+const aboutH = "font-serif font-semibold uppercase tracking-[0.12em] text-brand-forest text-base md:text-2xl";
 const Rule = () => <div className="w-12 h-0.5 bg-brand-teal mt-3 mb-6" />;
 const outline =
   "inline-flex items-center gap-2 px-6 py-3.5 border border-brand-forest text-brand-forest hover:bg-brand-forest hover:text-white text-xs font-medium uppercase tracking-wide transition-colors";
@@ -69,41 +65,38 @@ const outline =
 export default function HomePage() {
   return (
     <>
+      <JsonLd path="/" />
       {/* Hero */}
       <section
-        className="relative bg-cover bg-center text-white"
-        style={{ backgroundImage: `url(${UP}/2026/07/ChatGPT-Image-Jul-20-2026-07_10_17-PM-1.webp)` }}
+        className="hero-bg relative bg-cover bg-center text-white"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a26] via-[#1e3a26]/85 to-[#1e3a26]/0" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a26] via-[#1e3a26]/85 to-[#1e3a26]/0 max-md:from-[#1e3a26]/85 max-md:via-[#1e3a26]/80 max-md:to-[#1e3a26]/75" />
         <div className="relative max-w-[1440px] mx-auto px-5 lg:px-6 pt-12 pb-0">
-          <div className="max-w-[680px] border-l-2 border-brand-teal pl-4 sm:pl-8 -ml-1">
+          <div className="max-w-[620px] border-l-2 border-brand-teal pl-4 sm:pl-8 -ml-1">
             <p className="font-serif text-xl font-semibold text-white/80">Short Let Management Across the UK</p>
-            <h1 className="font-serif text-[34px] sm:text-[56px] font-medium leading-[1.15] mt-3">
+            <h1 className="font-serif text-[32px] sm:text-[52px] font-medium leading-[1.1] mt-2">
               Unlock Higher Income <br />with Short – Term Lettings <br />Without the Hassle
             </h1>
-            <div className="font-body text-lg leading-relaxed mt-6 text-white/90">
+            <div className="font-body text-base sm:text-lg leading-[1.7] mt-6 text-white/90 max-w-[560px]">
               <p>We help UK landlords earn more through fully managed short-stay accommodation.</p>
               <p>We handle 100% of the work, so you enjoy higher returns without the day-to-day hassle.</p>
             </div>
             <p className="flex items-center gap-2 mt-4">
               <BadgeCheck className="w-5 h-5" /> No Upfront Fees
             </p>
-            <div className="flex flex-wrap gap-4 mt-8 pb-10">
-              <a href="#booking-form" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-black font-medium shadow-md hover:bg-slate-100 transition-colors">
+            <div className="flex flex-wrap gap-4 mt-7 pb-9">
+              <a href="#booking-form" className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3 rounded-md sm:rounded-none bg-white text-black font-medium shadow-md hover:bg-slate-100 transition-colors">
                 Get Your Free Assessment <ArrowRight className="w-4 h-4" />
               </a>
-              <Link href="/book-a-consultation/" className="inline-flex items-center gap-2 px-6 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-wide hover:bg-white hover:text-black transition-colors">
-                BOOK A CONSULTATION
-              </Link>
             </div>
           </div>
           <div className="border-t border-white/25 mt-2 lg:w-[75%]">
-            <div className="grid grid-cols-2 lg:grid-cols-4 py-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-5 py-6">
               {heroStats.map(({ Icon, value, label }) => (
-                <div key={label} className="flex items-center gap-3 px-5 border-l border-white/25 first:border-l-0 lg:first:border-l">
+                <div key={label} className="flex max-sm:flex-col max-sm:text-center items-center gap-3 px-3 sm:px-5 lg:border-l border-white/25">
                   <Icon className="w-7 h-7 shrink-0" />
                   <div>
-                    <p className="font-serif text-3xl leading-none whitespace-nowrap">{value}</p>
+                    <p className="font-serif text-2xl sm:text-3xl leading-none">{value}</p>
                     <p className="text-sm mt-1 text-white/85">{label}</p>
                   </div>
                 </div>
@@ -114,19 +107,24 @@ export default function HomePage() {
       </section>
 
       {/* 5 steps */}
-      <section className="max-w-[1440px] mx-auto px-5 lg:px-5 pt-24 pb-16">
+      <section className="max-w-[1440px] mx-auto px-5 lg:px-5 pt-16 md:pt-24 pb-16">
         <p className="font-serif italic text-xl text-brand-teal">How It Works</p>
         <h2 className={`${sectionH} mt-2`}>Our Simple 5 Step Process</h2>
-        <div className="relative grid sm:grid-cols-2 lg:grid-cols-5 gap-y-10 mt-14">
+        <div className="relative grid md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-y-10 mt-10 md:mt-14">
           <div className="hidden lg:block absolute top-9 left-[10%] right-[10%] h-px bg-brand-teal/40" />
           {steps.map(({ Icon, title, text }, i) => (
-            <div key={title} className="relative text-center px-3">
-              <div className="w-[72px] h-[72px] rounded-full bg-white border border-slate-300 text-brand-forest flex items-center justify-center mx-auto">
+            <div
+              key={title}
+              className="relative max-md:grid max-md:grid-cols-[72px_1fr] max-md:gap-x-4 max-md:items-center max-md:bg-white max-md:border max-md:border-slate-200 max-md:rounded-xl max-md:shadow-sm max-md:p-4 md:text-center md:px-3"
+            >
+              <div className="w-[72px] h-[72px] rounded-full bg-white border border-slate-300 text-brand-forest flex items-center justify-center md:mx-auto">
                 <Icon className="w-8 h-8" strokeWidth={2.5} />
               </div>
-              <p className="font-serif text-3xl text-brand-teal mt-5">{i + 1}</p>
-              <h3 className="font-medium mt-2 max-w-[120px] mx-auto leading-relaxed">{title}</h3>
-              <p className="font-body text-[17px] text-slate-700 mt-5 leading-8">{text}</p>
+              <div>
+                <p className="font-serif text-2xl md:text-3xl text-brand-teal md:mt-5">{i + 1}</p>
+                <h3 className="font-medium whitespace-pre-line md:mt-2 md:mx-auto leading-relaxed">{title}</h3>
+              </div>
+              <p className="font-body whitespace-pre-line text-base md:text-[17px] text-slate-700 mt-3 md:mt-5 leading-7 md:leading-8 max-md:col-span-2">{text}</p>
             </div>
           ))}
         </div>
@@ -134,14 +132,14 @@ export default function HomePage() {
 
       {/* Performance */}
       <section className="max-w-[1440px] mx-auto px-5">
-        <div className="border-b border-slate-200 pb-16 pt-10 grid grid-cols-2 lg:grid-cols-4">
+        <div className="border-b border-slate-200 pb-16 pt-10 grid grid-cols-2 gap-y-8 lg:grid-cols-4">
           {performance.map(({ Icon, value, label }) => (
-            <div key={label} className="flex flex-col items-center lg:items-start border-l border-slate-400 first:border-l-0 px-10">
-              <div className="flex items-center gap-4">
+            <div key={label} className="flex flex-col items-center text-center lg:text-left lg:items-start lg:border-l border-slate-400 lg:first:border-l-0 lg:px-10">
+              <div className="flex flex-col lg:flex-row items-center gap-1 lg:gap-4">
                 <Icon className="w-7 h-7 text-brand-teal shrink-0" />
                 <p className="font-serif text-4xl font-medium text-brand-forest">{value}</p>
               </div>
-              <p className="font-body text-slate-700 mt-1 ml-11">{label}</p>
+              <p className="font-body text-sm lg:text-base text-slate-700 mt-1 lg:ml-11">{label}</p>
             </div>
           ))}
         </div>
@@ -154,7 +152,7 @@ export default function HomePage() {
         style={{ backgroundImage: `url(${UP}/2026/08/WhatsApp-Image-2026-08-03-at-7.50.19-PM-1-1.webp)` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#2c4834] via-[#2c4834]/85 to-[#2c4834]/10" />
-        <div className="relative max-w-[640px] mx-auto px-5 py-28">
+        <div className="relative max-w-[640px] mx-auto px-3 sm:px-5 py-12 sm:py-28">
           <ProjectionForm />
         </div>
       </section>
@@ -166,9 +164,10 @@ export default function HomePage() {
             <h2 className={sectionH}>Handpicked Properties We Manage</h2>
             <Link href="/book-a-consultation/" className={outline}>BOOK A CONSULTATION <ArrowRight className="w-4 h-4" /></Link>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <p className="lg:hidden mt-8 text-xs font-semibold tracking-[0.15em] uppercase text-brand-teal">Swipe to see more →</p>
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 lg:grid lg:grid-cols-4 lg:gap-6 mt-6 lg:mt-12 pb-2 -mx-5 px-5 lg:mx-0 lg:px-0">
             {properties.map((p) => (
-              <Link key={p.title} href="/book-a-consultation/" className="group block bg-white rounded-md shadow-sm overflow-hidden">
+              <Link key={p.title} href="/book-a-consultation/" className="group block bg-white rounded-md shadow-sm overflow-hidden shrink-0 w-[290px] snap-start lg:w-auto">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={p.img} alt={p.alt} className="w-full aspect-[4/3] object-cover" />
                 <div className="px-8 pt-8 pb-6">
@@ -189,7 +188,7 @@ export default function HomePage() {
       <section className="max-w-[1440px] mx-auto px-5 py-20 grid lg:grid-cols-[1.1fr_1fr_1.1fr_1.1fr] gap-x-10 gap-y-12">
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BRAND.logo} alt="Ichiban Stays" className="h-14 w-auto shadow-sm" />
+          <img src={BRAND.logo} alt="Ichiban Stays" className="h-12 md:h-14 w-auto shadow-sm" />
           <p className="font-serif italic text-xl text-brand-green mt-4">Fully Managed Short Stay Properties</p>
           <h3 className={`${aboutH} mt-16 normal-case tracking-normal`}>About US</h3>
           <Rule />
@@ -205,7 +204,7 @@ export default function HomePage() {
           <Rule />
           <ul>
             {services.map(({ Icon, label }) => (
-              <li key={label} className="flex items-center gap-5 py-3.5 border-b border-slate-200 last:border-0 w-[210px]">
+              <li key={label} className="flex items-center gap-5 py-3.5 border-b border-slate-200 last:border-0 md:w-[210px]">
                 <Icon className="w-8 h-8 text-brand-green shrink-0" />
                 <span className="text-slate-700 leading-snug">{label}</span>
               </li>
@@ -219,9 +218,9 @@ export default function HomePage() {
             {[
               { Icon: Mail, t: "Email", v: <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a> },
               { Icon: Phone, t: "Phone", v: <a href={BRAND.phoneHref} className="text-blue-700">{BRAND.phone}</a> },
-              { Icon: MapPin, t: "Address", v: <>{BRAND.address.map((l) => <React.Fragment key={l}>{l}<br /></React.Fragment>)}</> },
+              { Icon: MapPin, t: "Address", v: <>{BRAND.address.join(" ")}</> },
             ].map(({ Icon, t, v }) => (
-              <li key={t} className="flex gap-5 py-6 border-b border-slate-200 last:border-0">
+              <li key={t} className="flex gap-5 py-6 border-b border-slate-200 last:border-0 max-md:flex-col max-md:items-center max-md:text-center">
                 <span className="w-12 h-12 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0"><Icon className="w-5 h-5 text-brand-forest" /></span>
                 <div><h4 className="font-serif text-2xl font-semibold leading-none mb-2">{t}</h4><div className="text-slate-800 leading-6">{v}</div></div>
               </li>

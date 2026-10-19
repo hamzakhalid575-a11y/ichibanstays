@@ -2,34 +2,41 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { BRAND, NAV, NavItem } from "@/lib/site";
 
-function Desktop({ item }: { item: NavItem }) {
+const isActive = (item: NavItem, path: string): boolean =>
+  item.href === path || item.children.some((c) => isActive(c, path));
+
+function Desktop({ item, path }: { item: NavItem; path: string }) {
+  const tone = isActive(item, path) ? "text-brand-green" : "text-[#334155]";
   if (!item.children.length) {
     return (
-      <Link href={item.href} className="text-sm text-brand-ink hover:text-brand-green transition-colors">
-        {item.label}
-      </Link>
+      <div className="h-[138px] flex items-center border-b-2 border-transparent hover:border-brand-green -mb-px">
+        <Link href={item.href} className={`text-[15px] whitespace-nowrap ${tone} hover:text-brand-green transition-colors`}>
+          {item.label}
+        </Link>
+      </div>
     );
   }
   return (
-    <div className="relative group">
-      <Link href={item.href} className="inline-flex items-center gap-1 text-sm text-brand-ink hover:text-brand-green transition-colors">
+    <div className="relative group h-[138px] flex items-center border-b-2 border-transparent hover:border-brand-green -mb-px">
+      <Link href={item.href} className={`inline-flex items-center gap-1 text-[15px] whitespace-nowrap ${tone} hover:text-brand-green transition-colors`}>
         {item.label} <ChevronDown className="w-3.5 h-3.5" />
       </Link>
-      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition absolute left-0 top-full pt-3 z-50">
-        <ul className="min-w-[230px] bg-white border border-slate-200 shadow-lg rounded-md py-2">
+      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition absolute left-0 top-full z-50">
+        <ul className="min-w-[240px] bg-white border border-slate-200 shadow-md">
           {item.children.map((c) => (
             <li key={c.href + c.label} className="relative group/sub">
-              <Link href={c.href} className="flex items-center justify-between px-4 py-2 text-sm text-brand-ink hover:bg-brand-sage hover:text-brand-green">
+              <Link href={c.href} className="flex items-center justify-between px-5 py-2.5 text-[15px] leading-snug text-[#334155] hover:text-brand-green">
                 {c.label} {c.children.length > 0 && <ChevronDown className="w-3.5 h-3.5 -rotate-90" />}
               </Link>
               {c.children.length > 0 && (
-                <ul className="invisible opacity-0 group-hover/sub:visible group-hover/sub:opacity-100 transition absolute left-full top-0 min-w-[220px] max-h-[70vh] overflow-y-auto bg-white border border-slate-200 shadow-lg rounded-md py-2">
+                <ul className="invisible opacity-0 group-hover/sub:visible group-hover/sub:opacity-100 transition absolute left-full top-0 min-w-[220px] bg-white border border-slate-200 shadow-md">
                   {c.children.map((g) => (
                     <li key={g.href}>
-                      <Link href={g.href} className="block px-4 py-2 text-sm text-brand-ink hover:bg-brand-sage hover:text-brand-green">
+                      <Link href={g.href} className="block px-5 py-2.5 text-[15px] leading-snug text-[#334155] hover:text-brand-green">
                         {g.label}
                       </Link>
                     </li>
@@ -71,27 +78,28 @@ function Mobile({ item, close, depth = 0 }: { item: NavItem; close: () => void; 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const path = usePathname();
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-[#eee8dc]">
-      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-16 md:h-24 flex items-center justify-between">
+    <header className="relative z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.05),0_6px_20px_rgba(0,0,0,0.04)]">
+      <div className="max-w-[1400px] mx-auto px-5 lg:px-8 h-20 lg:h-[138px] flex items-center justify-between">
         <Link href="/" aria-label={BRAND.name} className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BRAND.logo} alt="Ichiban Stays logo" width={310} height={52} className="h-9 md:h-[52px] w-auto" />
+          <img src={BRAND.logoHeader} alt="Ichiban Stays logo" width={310} height={52} className="h-[33px] lg:h-[52px] w-auto" />
         </Link>
-        <nav className="hidden lg:flex items-center gap-8 ml-auto mr-8">
+        <nav className="hidden lg:flex items-center gap-7 ml-auto mr-8">
           {NAV.map((n) => (
-            <Desktop key={n.href + n.label} item={n} />
+            <Desktop key={n.href + n.label} item={n} path={path} />
           ))}
         </nav>
         <Link
           href="/book-a-consultation/"
           target="_blank"
-          className="hidden lg:inline-flex items-center px-5 py-3 rounded-md bg-brand-green hover:bg-brand-greenDark text-white text-sm font-medium transition-colors"
+          className="hidden lg:inline-flex items-center whitespace-nowrap px-5 py-3 rounded-md bg-brand-green hover:bg-brand-greenDark text-white text-sm font-medium transition-colors"
         >
           Get Free Projection
         </Link>
-        <button className="lg:hidden p-2" aria-label="Menu" onClick={() => setOpen(!open)}>
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <button className="lg:hidden w-[42px] h-[42px] rounded-full bg-brand-green text-white flex items-center justify-center" aria-label="Menu" onClick={() => setOpen(!open)}>
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
       {open && (
