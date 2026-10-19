@@ -36,7 +36,7 @@ const performance = [
   { Icon: Banknote, value: "£2M+", label: "Revenue Generated" },
   { Icon: Star, value: "4.9 ★", label: "Average Guest Rating" },
   { Icon: CalendarDays, value: "120+", label: "Properties Managed" },
-  { Icon: StarHalf, value: "5 ★", label: "Guest Experience" },
+  { Icon: StarHalf, value: "5 ★", label: "Guest Experience......" },
 ];
 
 const properties = [
@@ -92,6 +92,9 @@ export default function HomePage() {
               <a href="#booking-form" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-black font-medium shadow-md hover:bg-slate-100 transition-colors">
                 Get Your Free Assessment <ArrowRight className="w-4 h-4" />
               </a>
+              <Link href="/book-a-consultation/" className="inline-flex items-center gap-2 px-6 py-3.5 border border-white text-white text-xs font-medium uppercase tracking-wide hover:bg-white hover:text-black transition-colors">
+                BOOK A CONSULTATION
+              </Link>
             </div>
           </div>
           <div className="border-t border-white/25 mt-2 lg:w-[75%]">

@@ -81,19 +81,19 @@ export default function ProjectionForm() {
         <input type="number" className={field} placeholder="Approx. Size (sq ft)" value={form.sizeSqFt} onChange={set("sizeSqFt")} />
         <select className={field} value={form.bathrooms} onChange={set("bathrooms")}>
           <option value="">Bathrooms</option>
-          {["1", "2", "3", "4", "5+"].map((o) => <option key={o}>{o}</option>)}
+          {["1 Bathroom", "2 Bathrooms", "3 Bathrooms", "4 Bathrooms", "5+ Bathrooms"].map((o) => <option key={o}>{o}</option>)}
         </select>
         <select className={field} value={form.receptionRooms} onChange={set("receptionRooms")}>
           <option value="">Reception Room</option>
-          {["1", "2", "3", "4+"].map((o) => <option key={o}>{o}</option>)}
+          {["1", "2", "3", "More"].map((o) => <option key={o}>{o}</option>)}
         </select>
         <select className={field} value={form.bedrooms} onChange={set("bedrooms")}>
           <option value="">Bedrooms</option>
-          {["Studio", "1", "2", "3", "4", "5+"].map((o) => <option key={o}>{o}</option>)}
+          {["1 Bedroom", "2 Bedrooms", "3 Bedrooms", "4 Bedrooms", "5+ Bedrooms"].map((o) => <option key={o}>{o}</option>)}
         </select>
         <select className={field} value={form.propertyType} onChange={set("propertyType")}>
           <option value="">Property Type</option>
-          {["Flat / Apartment", "House", "Studio", "Other"].map((o) => <option key={o}>{o}</option>)}
+          {["Apartment", "House", "Studio", "Flat", "Bungalow", "Other"].map((o) => <option key={o}>{o}</option>)}
         </select>
       </div>
       {error && <p className="text-sm text-red-600">{error}</p>}

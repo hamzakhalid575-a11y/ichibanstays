@@ -1,23 +1,24 @@
 import React from "react";
 import ProjectionForm from "@/components/ProjectionForm";
+import BookingForm from "@/components/BookingForm";
 
-const MARKER = '<div data-projection-form></div>';
+const PROJECTION = '<div data-projection-form></div>';
+const BOOKING = '<div data-booking-form></div>';
 
 /** Renders WordPress HTML; the WPForms shortcode becomes the lead form. */
 export default function WpContent({ html }: { html: string }) {
-  const parts = html.split(MARKER);
+  const parts = html.split(/(<div data-(?:projection|booking)-form><\/div>)/);
   return (
     <div className="wp-content">
-      {parts.map((part, i) => (
-        <React.Fragment key={i}>
-          <div dangerouslySetInnerHTML={{ __html: part }} />
-          {i < parts.length - 1 && (
-            <div id="booking-form" className="not-prose my-8">
-              <ProjectionForm />
-            </div>
-          )}
-        </React.Fragment>
-      ))}
+      {parts.map((part, i) =>
+        part === PROJECTION ? (
+          <div key={i} id="booking-form" className="my-8"><ProjectionForm /></div>
+        ) : part === BOOKING ? (
+          <div key={i} className="my-8 bg-white border border-[#dfe3d8] rounded-xl p-6 sm:p-8 shadow-sm"><BookingForm /></div>
+        ) : (
+          <div key={i} dangerouslySetInnerHTML={{ __html: part }} />
+        )
+      )}
     </div>
   );
 }

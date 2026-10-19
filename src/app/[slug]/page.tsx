@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PAGES, pathFor } from "@/lib/site";
@@ -10,6 +11,34 @@ const entries = Object.entries(PAGES).filter(([p]) => p !== "/");
 
 export function generateStaticParams() {
   return entries.map(([, v]) => ({ slug: v.slug }));
+}
+
+const POSTS = entries.filter(([, v]) => v.kind === "post").sort((a, b) => a[1].order.localeCompare(b[1].order));
+
+function PostNav({ slug }: { slug: string }) {
+  const i = POSTS.findIndex(([, v]) => v.slug === slug);
+  const prev = POSTS[i - 1];
+  const next = POSTS[i + 1];
+  return (
+    <nav aria-label="Posts" className="max-w-[780px] mx-auto px-5 pb-16 grid sm:grid-cols-2 gap-6 text-sm">
+      <div>
+        {prev && (
+          <Link href={prev[0]} rel="prev" className="block border-t border-slate-200 pt-4 hover:text-brand-green">
+            <span className="text-slate-500">Previous</span>
+            <p className="font-medium text-brand-forest">{prev[1].title}</p>
+          </Link>
+        )}
+      </div>
+      <div className="sm:text-right">
+        {next && (
+          <Link href={next[0]} rel="next" className="block border-t border-slate-200 pt-4 hover:text-brand-green">
+            <span className="text-slate-500">Next</span>
+            <p className="font-medium text-brand-forest">{next[1].title}</p>
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
 }
 
 function find(slug: string) {
@@ -96,7 +125,8 @@ export default function WpPage({ params }: { params: { slug: string } }) {
         <h1>{page.title}</h1>
         {isPost && (
           <p className="meta">
-            {new Date(page.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+            By Ichiban Stays Team /{" "}
+            {new Date(page.date + "T12:00:00Z").toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
           </p>
         )}
       </header>
@@ -107,6 +137,7 @@ export default function WpPage({ params }: { params: { slug: string } }) {
         )}
         <WpContent html={page.html} />
       </div>
+      {isPost && <PostNav slug={params.slug} />}
     </article>
   );
 }

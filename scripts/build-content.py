@@ -32,6 +32,7 @@ def path_for(x):
 def clean(html):
     html = html.replace(SITE + '/', '/').replace(SITE, '/')
     html = html.replace('/go/whatsapp/', 'https://wa.me/447572190291')
+    html = re.sub(r'\[wpforms id="447"\]', '<div data-booking-form></div>', html)
     html = re.sub(r'\[wpforms id="\d+"\]', '<div data-projection-form></div>', html)
     return html
 
@@ -48,7 +49,7 @@ for x in published.values():
     t, d = seo(x)
     pages[path_for(x)] = dict(
         kind=x['type'], slug=x['slug'], title=x['title'], seoTitle=t, description=d,
-        date=x['date'][:10], categories=[c for c in x['cats'] if c], html=clean(x['content']),
+        date=x['date'][:10], order=f"{x['date']}-{int(x['id']):08d}", categories=[c for c in x['cats'] if c], html=clean(x['content']),
         image=atts.get(x['meta'].get('_thumbnail_id', ''), ''))
 # Titles and descriptions as rendered by the live site (Yoast), crawled into live-meta.json.
 import os

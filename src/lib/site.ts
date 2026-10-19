@@ -10,6 +10,7 @@ export interface PageContent {
   categories: string[];
   html: string;
   image: string;
+  order: string;
 }
 
 export interface NavItem {
