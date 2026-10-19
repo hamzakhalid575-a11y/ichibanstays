@@ -1,15 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'ichibanstays.com',
-      },
-    ],
-  },
+  // WordPress permalinks end in a slash; keep URLs identical so SEO is preserved.
+  trailingSlash: true,
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

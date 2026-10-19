@@ -2,14 +2,19 @@
 
 Complete custom-coded Next.js 14 (App Router, TypeScript, Tailwind CSS) translation of [ichibanstays.com](https://ichibanstays.com) with **Firebase Firestore** (lead & property projection capture) and **Firebase Authentication** (Landlord & Admin Portal), ready for one-click deployment to **Vercel** or **Netlify**.
 
-## Features Included
-- **Exact Ichiban Stays Content & Architecture**:
-  - Homepage with Hero, 98% occupancy stats bar, 5-Step Process, £2M+ revenue metrics, Handpicked Properties showcase, and About Us section.
-  - Interactive **Get Your Free Income Projection** form wired directly to Firebase Firestore (`projections` collection) with instant revenue estimation.
-  - **5 Dedicated Service Pages** (`/services/[slug]`): Short-Term Let Management, Airbnb Management, Serviced Accommodation, Guaranteed Rent, and Services for Landlords.
-  - **28 Dynamic UK Location Pages** (`/areas/[slug]`): All 11 London neighbourhoods (Mayfair, Belgravia, Chelsea, Kensington, Notting Hill, Battersea, Islington, Camden, Covent Garden, Shoreditch, Canary Wharf) and 17 UK cities (Manchester, Birmingham, Liverpool, Leeds, Bristol, Newcastle, Nottingham, Sheffield, Leicester, Oxford, Cambridge, Brighton, Bath, York, Edinburgh, Glasgow, Cardiff).
-  - **9 Landlord Guides** (`/guides/[slug]`): Including *The 90-Day Rule in London*, *Management Fees Explained*, *Airbnb vs Long-Term Rental*, and more.
-  - **Firebase Auth & Firestore Admin Portal** (`/portal`): Manage incoming landlord projection leads, filter statuses (`new`, `contacted`, `assessed`), and export data.
+## Content
+
+All pages mirror the live WordPress site (same URLs, trailing slashes, titles, meta descriptions, nav):
+home, about, contact, FAQs (landlord + guest), services (short-term let, Airbnb, serviced accommodation,
+guaranteed rent, holiday let, landlords), Areas We Cover, 38 location pages (`/property-management-<area>/`),
+landlord guides and 10 posts.
+
+- `scripts/build-content.py` converts a WordPress export (Tools > Export) into `src/content/site.json`
+  (`python3 -I scripts/build-content.py export.xml`). Re-run it to refresh content.
+- Home (`src/app/page.tsx`) and `/book-a-consultation/` are hand-built from the Elementor layout.
+- Everything else renders through `src/app/[slug]/page.tsx`.
+- Lead forms write to Firestore: `projections` (home / landlord pages) and `consultations` (booking page).
+- Images are still served from `ichibanstays.com/wp-content/uploads`; download them into `public/` before the WordPress site is switched off.
 
 ## Quick Start
 

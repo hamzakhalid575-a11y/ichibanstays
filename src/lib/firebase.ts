@@ -46,8 +46,6 @@ export interface ProjectionLead {
   receptionRooms: string;
   bedrooms: string;
   propertyType: string;
-  estimatedMonthlyMin?: number;
-  estimatedMonthlyMax?: number;
   status?: "new" | "contacted" | "assessed";
   createdAt?: string;
 }
@@ -71,6 +69,21 @@ export async function submitContactInquiry(data: {
   const docRef = await addDoc(collection(db, "inquiries"), {
     ...data,
     status: "unread",
+    createdAt: serverTimestamp(),
+  });
+  return docRef.id;
+}
+
+export async function submitConsultationBooking(data: {
+  name: string;
+  email: string;
+  phone: string;
+  preferredDate: string;
+  preferredTime: string;
+}) {
+  const docRef = await addDoc(collection(db, "consultations"), {
+    ...data,
+    status: "new",
     createdAt: serverTimestamp(),
   });
   return docRef.id;

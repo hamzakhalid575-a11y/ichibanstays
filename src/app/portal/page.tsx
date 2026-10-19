@@ -128,7 +128,6 @@ export default function PortalPage() {
               <th className="p-4">Landlord</th>
               <th className="p-4">Property</th>
               <th className="p-4">Postcode</th>
-              <th className="p-4">Est. Income</th>
               <th className="p-4">Status</th>
             </tr>
           </thead>
@@ -141,9 +140,6 @@ export default function PortalPage() {
                 </td>
                 <td className="p-4">{l.bedrooms} {l.propertyType} ({l.bathrooms})</td>
                 <td className="p-4">{l.postcode}</td>
-                <td className="p-4 font-semibold">
-                  £{l.estimatedMonthlyMin?.toLocaleString()} – £{l.estimatedMonthlyMax?.toLocaleString()}
-                </td>
                 <td className="p-4">
                   <select
                     value={l.status || "new"}
